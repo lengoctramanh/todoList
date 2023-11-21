@@ -1,0 +1,103 @@
+body,
+html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.todolist {
+  width: 500px;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background: rgb(238, 174, 202);
+  background: linear-gradient(
+    90deg,
+    rgba(238, 174, 202, 0.618001814983806) 0%,
+    rgba(155, 148, 233, 1) 100%
+  );
+}
+button {
+  padding: 10px 17px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  background-color: #aeeebc;
+}
+button:hover {
+  background-color: #46e3fc;
+  color: white;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+input {
+  padding: 10px 17px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  width: 60%;
+  outline: none;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+list {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+.deleteBtn {
+  background-color: red;
+  color: white;
+}
+.editBtn {
+  background-color: blue;
+  color: white;
+}
+.deleteBtn:hover {
+  background-color: bisque;
+  color: black;
+}
+.editBtn:hover {
+  color: black;
+}
+#title {
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+  margin-top: 20px;
+}
+
+#showBtn {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 20px auto;
+  cursor: pointer;
+}
+.wrap {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+#backBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  z-index: 1;
+}

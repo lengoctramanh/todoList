@@ -5,21 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TO DO LIST</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
   </head>
   <body>
-    <div class="wrap">
-      <h1 id="title">TODO LIST</h1>
-      <button id="showBtn">LET'S GO</button>
-      <div class="todolist" id="todoList" style="display: none">
-        <h1 id="title">TODO LIST</h1>
-        <input type="text" id="taskInput" placeholder="Add a new task here" />
-        <button id="addBtn" >Add</button>
-        <ul id="taskList"></ul>
-        <button id="backBtn"><i class="fa-solid fa-x"></i></button>
+    <div class="todo-wrap">
+     
+      <h1>TODO LIST</h1>
+    
+      <button id="showBtn" onclick="openPopup('add')">LET'S ADD</button>
+
+     
+      <ul id="taskList">
+        <!-- <li class="todo-item">
+          <div>
+            <button class="editBtn">Edit</button>
+            <button class="deleteBtn">Delete</button>
+          </div>
+        </li> -->
+      </ul>
+
+      <div id="popup" class="popup">
+        <div class="popup-content">
+          
+          <h1 id="title">ADD TODO</h1>
+         
+          <button id="backBtn" onclick="closePopup()">
+            <i class="fa-solid fa-x"></i>
+          </button>
+          <div class="popup-form">
+          
+            <input
+              type="text"
+              id="taskInput"
+              placeholder="Add a new task here"
+             
+            />
+            <div>
+              <button class="editBtn" onclick="saveTodo()">Save</button>
+              <button class="deleteBtn" onclick="closePopup()">Cancel</button>
+            </div>
+          </div>
+        </div>
       </div>
+ 
+      <audio id="toastSuccess">
+        <source src="./asset/Sound.mp3" type="audio/mp3" />
+      </audio>
+
+
+      <audio id="toastError">
+        <source src="./asset/Sound1.mp3" type="audio/mp3" />
+      </audio>
+      <div id="toast" class="toast"></div>
+
     </div>
 
-    <script src="./js.js"></script>
+    <script src="./TodoList.js"></script>
   </body>
 </html>
+

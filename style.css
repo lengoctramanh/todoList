@@ -9,7 +9,13 @@ body
     height: 100vh;
     background-color: #f4f4f4;
 }
-
+.todo-completed {
+  display: flex;
+  gap: 30px;
+}
+.done {
+  text-decoration: line-through;
+}
 
 
 .todo-wrap {

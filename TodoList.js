@@ -11,6 +11,8 @@ const STATUS = {
 _ADD: "add",
 _EDIT: "edit",
 _ADD_NUM: -1,
+
+  _DONE: "done",
 };
 
 const todos = [];
@@ -19,28 +21,39 @@ let currentEditIndex = STATUS._ADD_NUM;
 const toastSuccess = document.getElementById("toastSuccess");
 const toastError = document.getElementById("toastError");
 
-// const listItem=JSON.parse(localStorage.getItem('listItem')) || []
+
+
+
+
+
 const renderTodoList = () => {
   const taskList = document.getElementById("taskList");
 taskList.innerHTML = "";
   todos.forEach((todo, index) => {
     const listItem = document.createElement("li");
-    listItem.className = "todo-item";
+    listItem.className = `todo-item ${todo.status === STATUS._DONE ? "done" : null}`;
+    
     listItem.innerHTML = `
-      <span>${todo}</span>
-      <div>
-          <button class="editBtn" onclick="openPopup('edit', ${index})">Edit</button>
-          <button class="deleteBtn" onclick="deleteTodo(${index})">Delete</button>
-      </div>
-      `;
+    <div class="todo-completed">
+    <input type="checkbox" id="todo${index}" name="todo${index}" onchange="completedTodo(${index})"  >
+      <label for="todo${index}">${todo}</label>
+    </div>
+      
+    <div>
+      <button class="editBtn" onclick="openPopup('edit', ${index})">Edit</button>
+      <button class="deleteBtn" onclick="deleteTodo(${index})">Delete</button>
+    </div>
+    `;
       taskList.appendChild(listItem);
-      // localStorage.setItem('listItem',JSON.stringify(todo))
+     
       console.log(todo)
+   
   });
 };
-
-
-
+const completedTodo = (index) => {
+  todos[index].status = todos[index].status === STATUS._DONE ? STATUS._DONE:"" ;
+  renderTodoList();
+};
 
 
 

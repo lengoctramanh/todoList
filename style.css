@@ -13,8 +13,11 @@ body
   display: flex;
   gap: 30px;
 }
-.done {
+.checked {
   text-decoration: line-through;
+  color: red;
+  font-weight: 400;
+ 
 }
 
 

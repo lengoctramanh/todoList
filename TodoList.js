@@ -11,19 +11,28 @@ const STATUS = {
 _ADD: "add",
 _EDIT: "edit",
 _ADD_NUM: -1,
-
+_PENDING:'pending',
   _DONE: "done",
 };
-
-const todos = [];
+let storageKey=' todos'
+let todos = [];
 let currentEditIndex = STATUS._ADD_NUM;
 
 const toastSuccess = document.getElementById("toastSuccess");
 const toastError = document.getElementById("toastError");
 
 
+const saveToLocalStorage = () => {
+  localStorage.setItem("todos", JSON.stringify(todos));
+};
 
-
+const loadFromLocalStorage = () => {
+  const storedTodos = localStorage.getItem("todos");
+  if (storedTodos) {
+      todos = JSON.parse(storedTodos);
+  }
+};
+loadFromLocalStorage();
 
 
 const renderTodoList = () => {
@@ -31,11 +40,11 @@ const renderTodoList = () => {
 taskList.innerHTML = "";
   todos.forEach((todo, index) => {
     const listItem = document.createElement("li");
-    listItem.className = `todo-item ${todo.status === STATUS._DONE ? "done" : null}`;
     
+    listItem.className = "todo-item";
     listItem.innerHTML = `
     <div class="todo-completed">
-    <input type="checkbox" id="todo${index}" name="todo${index}" onchange="completedTodo(${index})"  >
+    <input type="checkbox" id="todo${index}" name="todo${index}" onclick="updateStatus(this)"  >
       <label for="todo${index}">${todo}</label>
     </div>
       
@@ -50,10 +59,16 @@ taskList.innerHTML = "";
    
   });
 };
-const completedTodo = (index) => {
-  todos[index].status = todos[index].status === STATUS._DONE ? STATUS._DONE:"" ;
-  renderTodoList();
-};
+const updateStatus=(selectedTask)=> {
+console.log(selectedTask)
+  const taskName=selectedTask.parentElement.lastElementChild
+  if(selectedTask.checked) {
+    taskName.classList.add('checked')
+  } else {
+    taskName.classList.remove('checked')
+  }
+ 
+}
 
 
 
@@ -100,16 +115,18 @@ if(taskInput === "") {
     return saveEdit(currentEditIndex)
   } 
 
-  todos.push(taskInput);
+  todos.push({ name: taskInput, status:STATUS._PENDING});
   ToastSuccess(`Add ${taskInput} success `)
 
   toastSuccess.play();
   closePopupAndRenderList()
+  saveToLocalStorage();
 };
 
 const handleKeyPress=(e)=> {
 if(e.key==='Enter') {
   saveTodo()
+ 
 }
 }
 taskInput.addEventListener("keypress", handleKeyPress)
